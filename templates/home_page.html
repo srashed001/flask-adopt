@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %} 
+<div class="container">
+    {% for msg in get_flashed_messages()%}
+    <p class="display-2 text-center text-danger">{{msg}}</p>
+    {%endfor%}
+    <h1 class="display-1 text-center">Pets</h1>
+    <div class="row">
+    {% for pet in pets%}
+        <div class="col-sm-4 col-md-3 my-2">
+            <div class="card shadow h-100">
+                <img src="{{pet.photo_url}}" alt="{{pet.name}}" class="card-img-top" height="200px">
+                <div class="card-body">
+                    {% if pet.available %}
+                    <h2 class="card-title fw-bold">{{pet.name}}</h2>
+                    <p class='card-text'>{{pet.name}} <b>is available!</b></p>
+                    {% else %}
+                    <h2 class="card-title fw-light">{{pet.name}}</h2>
+                    <p class='card-text'>Sorry, {{pet.name}} found a home!</p>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <a href="/{{pet.id}}" class="btn btn-primary">Check me out</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <a href="/add" class="btn btn-info">Add New Pet</a>
+
+
+</div>
+{% endblock %}}}
